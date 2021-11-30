@@ -1,4 +1,5 @@
 import command.Command;
+import command.ShowText;
 import component.*;
 
 import java.util.Scanner;

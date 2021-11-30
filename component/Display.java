@@ -71,6 +71,7 @@ public class Display {
     public void deleteTail(int num) {
         if (num > text.length()) {
             System.out.println("DELETE NUM BIGGER THAN TEXT LENGTH!");
+            text = "";
             return;
         } else
             text = text.substring(0, text.length() - num);
@@ -79,6 +80,7 @@ public class Display {
     public void deleteHead(int num) {
         if (num > text.length()) {
             System.out.println("DELETE NUM BIGGER THAN TEXT LENGTH!");
+            text = "";
             return;
         } else
             text = text.substring(num, text.length());
@@ -87,7 +89,7 @@ public class Display {
     public void showHistory(int num) {
         int historySize = histories.size();
         if (num > historySize) {
-            System.out.println("MACRO LENGTH TO BIG!");
+            System.out.println("MACRO LENGTH TOO BIG!");
             return;
         }
         for (int i = historySize - num; i < historySize; i++) {
@@ -120,7 +122,7 @@ public class Display {
     public void defineMacro(int num, String name) {
         int historySize = histories.size();
         if (num > historySize) {
-            System.out.println("MACRO LENGTH TO BIG!");
+            System.out.println("MACRO LENGTH TOO BIG!");
             return;
         }
         ArrayList<Command> list = new ArrayList<>();
