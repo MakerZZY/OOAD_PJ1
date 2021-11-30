@@ -70,6 +70,21 @@ public class Parser {
                     c = new Redo();
                 break;
             }
+            case SetLang.identifier: {
+                if (!scan.hasNext())
+                    c = new SetLang(scan.next());
+                break;
+            }
+            case SetMode.identifier: {
+                if (!scan.hasNext())
+                    c = new SetMode(scan.next());
+                break;
+            }
+            case Spell.identifier: {
+                if (!scan.hasNext())
+                    c = new Spell();
+                break;
+            }
             case DefineMacro.identifier: {
                 int num = scan.hasNextInt() ? scan.nextInt() : 0;
                 String name = scan.hasNext() ? scan.next() : "";
@@ -82,7 +97,6 @@ public class Parser {
                     c = macros.get(command.substring(1));
             }
         }
-
         return c;
     }
 }
