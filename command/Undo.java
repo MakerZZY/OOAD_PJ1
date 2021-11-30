@@ -9,7 +9,6 @@ public class Undo implements Command {
     @Override
     public void doCommand(Display d) {
         d.undo();
-        d.showText();
     }
 
     @Override

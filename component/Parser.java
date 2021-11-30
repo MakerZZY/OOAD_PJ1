@@ -13,29 +13,47 @@ public class Parser {
             case AppendHead.identifier: {
                 int first = line.indexOf("\"") + 1;
                 int last = line.lastIndexOf("\"");
-                c = new AppendHead(line.substring(first, last));
+                String sub = line.substring(first, last);
+                if (first != 0 && first < last && !sub.contains("\""))
+                    c = new AppendHead(sub);
                 break;
             }
             case AppendTail.identifier: {
                 int first = line.indexOf("\"") + 1;
                 int last = line.lastIndexOf("\"");
-                c = new AppendTail(line.substring(first, last));
+                String sub = line.substring(first, last);
+                if (first != 0 && first < last && !sub.contains("\""))
+                    c = new AppendTail(sub);
                 break;
             }
             case DeleteHead.identifier: {
-                c = new DeleteHead(scan.nextInt());
+                if (scan.hasNextInt())
+                    c = new DeleteHead(scan.nextInt());
                 break;
             }
             case DeleteTail.identifier: {
-                c = new DeleteTail(scan.nextInt());
+                if (scan.hasNextInt())
+                    c = new DeleteTail(scan.nextInt());
                 break;
             }
             case ShowText.identifier: {
-                c = new ShowText();
+                if (!scan.hasNext())
+                    c = new ShowText();
                 break;
             }
             case ListHistory.identifier: {
-                c = new ListHistory(scan.nextInt());
+                if (scan.hasNextInt())
+                    c = new ListHistory(scan.nextInt());
+                break;
+            }
+            case Undo.identifier: {
+                if (!scan.hasNext())
+                    c = new Undo();
+                break;
+            }
+            case Redo.identifier: {
+                if (!scan.hasNext())
+                    c = new Redo();
                 break;
             }
         }

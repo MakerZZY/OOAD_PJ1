@@ -8,7 +8,7 @@ public class Redo implements Command {
 
     @Override
     public void doCommand(Display d) {
-
+        d.redo();
     }
 
     @Override

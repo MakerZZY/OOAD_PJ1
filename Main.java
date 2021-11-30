@@ -15,7 +15,12 @@ public class Main {
             if (commandLine.equals("exit"))
                 break;
             Command c = Parser.parseLine(commandLine);
+            if (c == null) {
+                System.out.println("INVALID COMMAND: " + commandLine);
+                continue;
+            }
             c.doCommand(display);
+            display.showText();
         }
         scan.close();
     }
