@@ -1,15 +1,18 @@
+package command;
+
+import component.Display;
+
 public class DeleteTail implements Command{
-    int num;
+    private int num;
     public static final String identifier = "D";
     public DeleteTail(int num) {
         this.num = num;
     }
+
     @Override
     public void doCommand(Display d){
         d.deleteTail(num);
-        d.addCommandHistory(this);
-        d.addChangeHistory(this);
-        d.addTextHistory();
+        d.updateHistory(this);
         d.showText();
     }
 

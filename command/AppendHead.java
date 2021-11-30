@@ -1,5 +1,9 @@
+package command;
+
+import component.Display;
+
 public class AppendHead implements Command {
-    String append;
+    private String append;
     public static final String identifier = "a";
     public AppendHead(String s) {
         append = s;
@@ -8,10 +12,7 @@ public class AppendHead implements Command {
     @Override
     public void doCommand(Display d){
         d.appendHead(append);
-        d.addCommandHistory(this);
-
-        d.addChangeHistory(this);
-        d.addTextHistory();
+        d.updateHistory(this);
         d.showText();
     }
 
