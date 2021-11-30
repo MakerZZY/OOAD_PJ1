@@ -19,6 +19,7 @@ public class Display {
     private Set<String> words;
     private String path;
     private Parser parser;
+    private String mode;
 
     public Display(String text) {
         this.initiate = text;
@@ -132,32 +133,32 @@ public class Display {
     }
 
     public void setLang(String lang) {
-        if ("eng" == lang)
+        if (lang.equals("eng"))
             path = "eng.txt";
-        else if ("fra" == lang)
+        else if (lang.endsWith("fra"))
             path = "fra.txt";
         else
             System.out.println("LANGUAGE NOT SUPPORTED!");
     }
 
     public void setMode(String mode) {
-        check = text.replaceAll(",", "");
-        check = check.replaceAll("\\.", "");
-        if ("xml" == mode) {
-            check = check.replaceAll("<.*?>", "");
-        } else if ("txt" != mode)
+        if (mode.equals("xml") || mode.equals("txt")) {
+            this.mode = mode;
+        } else
             System.out.println("MODE NOT SUPPORTED!");
     }
 
 
     public void spell() {
-        if (path == null) {
-            System.out.println("YOU MUST SET LANGUAGE FIRST!");
-            return;
-        } else if (check == null) {
-            System.out.println("YOU MUST SET MODE FIRST!");
-            return;
-        }
+
+        check = text.replaceAll(",", "");
+        check = check.replaceAll("\\.", "");
+        if (mode.equals("xml")) {
+            check = check.replaceAll("<.*?>", "");
+        } else if (!mode.equals("txt"))
+            System.out.println("MODE NOT SUPPORTED!");
+
+
         initWords();
         String[] split = check.split("\\s+");
         for (int i = 0; i < split.length; i++) {

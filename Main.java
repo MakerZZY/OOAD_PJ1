@@ -29,6 +29,7 @@ public class Main {
                 continue;
             }
             c.doCommand(display);
+            //new ShowText().doCommand(display);
             if (c.modified())
                 display.updateHistory(c);
         }

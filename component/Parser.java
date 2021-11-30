@@ -71,12 +71,12 @@ public class Parser {
                 break;
             }
             case SetLang.identifier: {
-                if (!scan.hasNext())
+                if (scan.hasNext())
                     c = new SetLang(scan.next());
                 break;
             }
             case SetMode.identifier: {
-                if (!scan.hasNext())
+                if (scan.hasNext())
                     c = new SetMode(scan.next());
                 break;
             }
