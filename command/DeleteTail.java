@@ -11,13 +11,17 @@ public class DeleteTail implements Command {
     }
 
     @Override
+    public boolean modified() {
+        return true;
+    }
+
+    @Override
     public void doCommand(Display d) {
         d.deleteTail(num);
-        d.updateHistory(this);
     }
 
     @Override
     public void print() {
-        System.out.println(identifier + " " + num);
+        System.out.print(identifier + " " + num);
     }
 }

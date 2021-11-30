@@ -18,27 +18,33 @@ public class Display {
     private ArrayList<History> histories;
     private Set<String> words;
     private String path;
+    private Parser parser;
 
     public Display(String text) {
         this.initiate = text;
         this.text = text;
         histories = new ArrayList<History>();
         newHistoryPtr = 0;
+        parser = new Parser();
+    }
+
+    public Parser getParser() {
+        return parser;
     }
 
     private void initWords() {
         words = new HashSet<>();
         File file = new File(path);
         StringBuilder result = new StringBuilder();
-        try{
+        try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));//构造一个BufferedReader类来读取文件
 
             String s = null;
-            while((s = br.readLine())!=null){
+            while ((s = br.readLine()) != null) {
                 words.add(s);
             }
             br.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -79,12 +85,15 @@ public class Display {
     }
 
     public void showHistory(int num) {
-        if (num > histories.size()) {
-            System.out.println("LIST NUM BIGGER THAN HISTORY COMMAND LENGTH!");
+        int historySize = histories.size();
+        if (num > historySize) {
+            System.out.println("MACRO LENGTH TO BIG!");
             return;
         }
-        for (int i = 0; i < num; i++)
+        for (int i = historySize - num; i < historySize; i++) {
             histories.get(i).getCommand().print();
+            System.out.println("");
+        }
     }
 
     public void undo() {
@@ -108,41 +117,50 @@ public class Display {
         text = histories.get(newHistoryPtr++).getAfterExecuted();
     }
 
-    public void setLang(String lang){
-        if("eng" == lang)
+    public void defineMacro(int num, String name) {
+        int historySize = histories.size();
+        if (num > historySize) {
+            System.out.println("MACRO LENGTH TO BIG!");
+            return;
+        }
+        ArrayList<Command> list = new ArrayList<>();
+        for (int i = historySize - num; i < historySize; i++)
+            list.add(histories.get(i).getCommand());
+        parser.putMacros(name, new MacroCommand(name, list));
+    }
+
+    public void setLang(String lang) {
+        if ("eng" == lang)
             path = "eng.txt";
-        else if("fra" == lang)
+        else if ("fra" == lang)
             path = "fra.txt";
         else
             System.out.println("LANGUAGE NOT SUPPORTED!");
     }
 
-    public void setMode(String mode){
+    public void setMode(String mode) {
         check = text.replaceAll(",", "");
         check = check.replaceAll("\\.", "");
-        if("xml" == mode){
+        if ("xml" == mode) {
             check = check.replaceAll("<.*?>", "");
-        }else if("txt" != mode)
+        } else if ("txt" != mode)
             System.out.println("MODE NOT SUPPORTED!");
     }
 
 
-    public void spell()
-    {
-        if(path == null){
+    public void spell() {
+        if (path == null) {
             System.out.println("YOU MUST SET LANGUAGE FIRST!");
             return;
-        } else if(check == null){
+        } else if (check == null) {
             System.out.println("YOU MUST SET MODE FIRST!");
             return;
         }
-
         initWords();
         String[] split = check.split("\\s+");
         for (int i = 0; i < split.length; i++) {
-            if(!words.contains(split[i]))
+            if (!words.contains(split[i]))
                 System.out.println(split[i]);
         }
     }
-    
 }

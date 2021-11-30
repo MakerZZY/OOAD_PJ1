@@ -11,13 +11,17 @@ public class DeleteHead implements Command {
     }
 
     @Override
+    public boolean modified() {
+        return true;
+    }
+
+    @Override
     public void doCommand(Display d) {
         d.deleteHead(num);
-        d.updateHistory(this);
     }
 
     @Override
     public void print() {
-        System.out.println(identifier + " " + num);
+        System.out.print(identifier + " " + num);
     }
 }

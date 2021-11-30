@@ -5,7 +5,13 @@ import component.Display;
 public class Spell implements Command {
     public static final String identifier = "spell";
 
-    public Spell() { }
+    public Spell() {
+    }
+
+    @Override
+    public boolean modified() {
+        return false;
+    }
 
     @Override
     public void doCommand(Display d) {

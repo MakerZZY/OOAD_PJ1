@@ -4,7 +4,14 @@ import component.Display;
 
 public class Undo implements Command {
     public static final String identifier = "u";
-    public Undo(){}
+
+    public Undo() {
+    }
+
+    @Override
+    public boolean modified() {
+        return false;
+    }
 
     @Override
     public void doCommand(Display d) {
@@ -12,7 +19,7 @@ public class Undo implements Command {
     }
 
     @Override
-    public void print()  {
+    public void print() {
         System.out.println(identifier);
     }
 }

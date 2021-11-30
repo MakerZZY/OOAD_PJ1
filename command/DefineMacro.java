@@ -2,12 +2,14 @@ package command;
 
 import component.Display;
 
-public class ListHistory implements Command {
+public class DefineMacro implements Command {
     private int num;
-    public static final String identifier = "l";
+    private String name;
+    public static final String identifier = "m";
 
-    public ListHistory(int num) {
+    public DefineMacro(int num, String name) {
         this.num = num;
+        this.name = name;
     }
 
     @Override
@@ -17,7 +19,7 @@ public class ListHistory implements Command {
 
     @Override
     public void doCommand(Display d) {
-        d.showHistory(num);
+        d.defineMacro(num, name);
     }
 
     @Override

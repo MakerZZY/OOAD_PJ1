@@ -11,6 +11,11 @@ public class SetMode implements Command {
     }
 
     @Override
+    public boolean modified() {
+        return false;
+    }
+
+    @Override
     public void doCommand(Display d) {
         d.setMode(mode);
     }
